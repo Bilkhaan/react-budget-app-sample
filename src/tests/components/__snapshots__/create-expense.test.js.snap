@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should test render of CreateExpense 1`] = `
+<div>
+  this is Create view
+  <ExpenseForm
+    onsubmitExpense={[Function]}
+  />
+</div>
+`;

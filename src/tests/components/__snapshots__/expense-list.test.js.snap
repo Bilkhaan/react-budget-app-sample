@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should test expense list with data 1`] = `
+<div>
+  <h1>
+    Expense List
+  </h1>
+  <ExpenseListItem
+    amount={2300}
+    createdAt={0}
+    description="Rent bill"
+    id="1"
+    key="1"
+    note="Last month rent"
+  />
+  <ExpenseListItem
+    amount={220}
+    createdAt={10333234}
+    description="Coffee bill"
+    id="2"
+    key="2"
+    note="Last month rent"
+  />
+  <ExpenseListItem
+    amount={1200}
+    createdAt={-345600000}
+    description="Cable bill"
+    id="3"
+    key="3"
+    note="Last month rent"
+  />
+  <ExpenseListItem
+    amount={3200}
+    createdAt={345600000}
+    description=" Car bill"
+    id="4"
+    key="4"
+    note="Last month rent"
+  />
+</div>
+`;
+
+exports[`Should test expense list with no data 1`] = `
+<div>
+  <h1>
+    Expense List
+  </h1>
+  <p>
+    No expenses available
+  </p>
+</div>
+`;
