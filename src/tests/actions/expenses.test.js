@@ -1,10 +1,22 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { startAddExpense, addExpense, editExpense, removeExpense } from '../../actions/expenses.js';
+import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses } from '../../actions/expenses.js';
 import database from '../../firebase/firebase';
 import expenses from '../fixtures/expenses';
 
 const createMockStore = configureMockStore([thunk]);
+
+beforeEach((done) => {
+  const expenseData = {};
+
+  expenses.forEach(({ id, description, amount,  note, createdAt }) => {
+    expenseData[id] = { id, description, amount,  note, createdAt };
+  })
+
+  database.ref('expenses').set(expenseData).then(() => {
+    done();
+  });
+});
 
 test('Should setup remobve expense action', () => {
   const action = removeExpense({ id: '123abc4' });
@@ -66,7 +78,7 @@ test('Should test add expense to database', (done) => {
   });
 });
 
-test('Should setup add expense action with defaults', () => {
+test('Should setup add expense action with defaults', (done) => {
   const store = createMockStore({});
   const expense = {
     description: '',
@@ -91,19 +103,24 @@ test('Should setup add expense action with defaults', () => {
     expect(snapshot.val()).toEqual(expense);
     done();
   });
-  // const action = addExpense();
-  // const defaultExpense = {
-  //   description: '',
-  //   note: "",
-  //   amount: 0,
-  //   createdAt: 0
-  // };
-
-  // expect(action).toEqual({
-  //   type: 'ADD_EXPENSE',
-  //   expense: {
-  //     ...defaultExpense,
-  //     id: expect.any(String)
-  //   }
-  // });
 });
+
+test('Should test setExpenses correctly', () => {
+  const action = setExpenses(expenses);
+
+  expect(action.expenses).toEqual(expenses);
+})
+
+test('Should test startSetExpenses', (done) => {
+  const store = createMockStore({});
+
+  store.dispatch(startSetExpenses()).then(() => {
+    const action = store.getActions();
+
+    expect(action[0]).toEqual({
+      type: 'SET_EXPENSES',
+      expenses
+    });
+    done();
+  });
+})
