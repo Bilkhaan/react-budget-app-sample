@@ -10,7 +10,7 @@ beforeEach(() => {
   editExpenseSpy = jest.fn();
   removeExpenseSpy = jest.fn();
   historySpy = { push: jest.fn() }
-  wrapper = shallow(<EditExpense expense={expense} editExpense={editExpenseSpy} removeExpense={removeExpenseSpy} match={{params: {id: expense.id}}} history={historySpy} />);
+  wrapper = shallow(<EditExpense expense={expense} startEditExpense={editExpenseSpy} startRemoveExpense={removeExpenseSpy} match={{params: {id: expense.id}}} history={historySpy} />);
 });
 
 test('Should render edit expense correctly', () => {
@@ -24,6 +24,6 @@ test('Should test oneditExpense of edit expense', () => {
 
 test('Should test oneditExpense of edit expense', () => {
   wrapper.find('#remove-expense').simulate('click');
-  expect(removeExpenseSpy).toHaveBeenLastCalledWith({ id: expense.id });
+  expect(removeExpenseSpy).toHaveBeenLastCalledWith(expense.id);
   expect(historySpy.push).toHaveBeenLastCalledWith('/');
 });
