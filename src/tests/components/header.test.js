@@ -1,13 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-// import toJSON from 'enzyme-to-json';
-// import ReactShallowRenderer from 'react-test-renderer/shallow';
-import Header from '../../components/header';
+import { Header } from '../../components/header';
+
+let logoutClickedSpy, wrapper;
+
+beforeEach(() => {
+  logoutClickedSpy = jest.fn();
+  wrapper = shallow(<Header logoutClicked={logoutClickedSpy} />);
+});
 
 test('Should render header component correctly', () => {
-  const wrapper = shallow(<Header />);
   expect(wrapper).toMatchSnapshot();
-  // const renderer = new ReactShallowRenderer();
-  // renderer.render(<Header />);
-  // expect(renderer.getRenderOutput()).toMatchSnapshot();
 });
+
+test('Should test logout clicked', () => {
+  wrapper.find('#logout-btn').simulate('click');
+  expect(logoutClickedSpy).toHaveBeenCalled();
+})

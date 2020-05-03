@@ -18,7 +18,7 @@ beforeEach((done) => {
   });
 });
 
-test('Should setup remobve expense action', () => {
+test('Should setup remove expense action', () => {
   const action = removeExpense({ id: '123abc4' });
 
   expect(action).toEqual({
