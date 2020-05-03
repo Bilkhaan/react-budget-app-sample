@@ -7,7 +7,7 @@ export const Header = (props) => (
   <header>
     <h2>Expensify</h2>
     <div>
-      <NavLink to="/dashboard" activeClassName="is-active" exact={true}>Home</NavLink>
+      <NavLink to="/dashboard" activeClassName="is-active">Home</NavLink>
       <NavLink to="/create" activeClassName="is-active">New</NavLink>
       <NavLink to="/edit" activeClassName="is-active">Edit</NavLink>
       <NavLink to="/help" activeClassName="is-active">Help</NavLink>
